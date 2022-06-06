@@ -41,7 +41,11 @@ Below is a brief description of each table and attribute as found in the relatio
 * `id:integer` - Primary key, generated automatically by `ActiveRecord`
 * `name:string` - The name of the drill
 * `description:text` - The description of the drill
-* `is_ramp:boolean` - Whether the drill is a ramp drill or not. This affects how the drill is displayed.
+* `style:integer` - Enum value representing the style of the drill. This affects how the drill is displayed. The enum values are as follows:
+    * 0: Horns down
+    * 1: Horns up, keep horn up at the end
+    * 2: Horns up, horns down at the end
+    * 3: Ramp drill
 * `ramp_cadences:integer` - The number of ramp cadences; only used if the drill is a ramp drill. If it is a ramp drill and the value of this attribute is 0, it is interpreted as *"cadences ad infinitum"* when displaying the drill.
 * `user_id:integer` - Foreign key to the ID of the user that wrote the drill
 
@@ -55,7 +59,13 @@ Below is a brief description of each table and attribute as found in the relatio
 ### `Fundamentals` - OSUMB fundamentals building blocks. Only modified during initial database seeding.
 * `id:integer` - Primary key, generated automatically by `ActiveRecord`
 * `name:string` - The name of the fundamental
-* `is_turn:boolean` - Whether the move represents a turn (e.g., right flank, box TTR) or not (e.g., forward march, left lateral slide)
+* `type:integer` - Enum value representing the type of the move. This affects which types of moves can precede or follow the current move. The enum values are as follows:
+    * 0: Forward move (e.g., forward march, 6-to-5 adjusted step, right oblique 8-to-5)
+    * 1: Backward or lateral move (e.g., backward march, left lateral slide, step sides)
+    * 2: Horn slide (e.g., right horn slide)
+    * 3: Turn (e.g., right flank, slow turn left 180 degrees in 8 counts)
+    * 4: TTR (e.g., regular TTR, slide TTR on 4)
+    * 5: Hats off. Note that this type of move is only allowed in a horns up drill. If this move is the last move of the drill, it will be rendered as *"Hats off Ohio"*. If this move is anywhere else in the drill, it will be rendered as *"Hats off rest 1-2-3"*.
 
 ---
 
