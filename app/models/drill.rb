@@ -1,6 +1,7 @@
 class Drill < ApplicationRecord
   # Assocations
   belongs_to :user
+  has_many :moves, dependent: :destroy
 
   # Validations
   validates :name, presence: true,

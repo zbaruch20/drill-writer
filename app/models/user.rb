@@ -4,7 +4,7 @@ class User < ApplicationRecord
   include UserHelper
 
   # Associations
-  has_many :drills
+  has_many :drills, dependent: :destroy
 
   # Validations
   validates :username, presence: true,
