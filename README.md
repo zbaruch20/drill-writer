@@ -63,9 +63,10 @@ Below is a brief description of each table and attribute as found in the relatio
     * 0: Forward move (e.g., forward march, 6-to-5 adjusted step, right oblique 8-to-5)
     * 1: Backward or lateral move (e.g., backward march, left lateral slide, step sides)
     * 2: Horn slide (e.g., right horn slide)
-    * 3: Turn (e.g., right flank, slow turn left 180 degrees in 8 counts)
-    * 4: TTR (e.g., regular TTR, slide TTR on 4)
-    * 5: Hats off. Note that this type of move is only allowed in a horns up drill. If this move is the last move of the drill, it will be rendered as *"Hats off Ohio"*. If this move is anywhere else in the drill, it will be rendered as *"Hats off rest 1-2-3"*.
+    * 3: Flank (e.g., right flank)
+    * 4: Slow turn (e.g., slow turn left 180 degrees in 8 counts)
+    * 5: TTR (e.g., regular TTR, slide TTR on 4)
+    * 6: Hats off. Note that this type of move is only allowed in a horns up drill. If this move is the last move of the drill, it will be rendered as *"Hats off Ohio"*. If this move is anywhere else in the drill, it will be rendered as *"Hats off rest 1-2-3"*.
 
 ---
 
