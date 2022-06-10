@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_07_201203) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_09_201010) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_07_201203) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.string "before_string"
+    t.string "after_string"
     t.index ["user_id"], name: "index_drills_on_user_id"
   end
 
@@ -39,6 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_07_201203) do
     t.bigint "fundamental_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "string"
     t.index ["drill_id"], name: "index_moves_on_drill_id"
     t.index ["fundamental_id"], name: "index_moves_on_fundamental_id"
   end
