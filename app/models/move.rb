@@ -74,11 +74,17 @@ class Move < ApplicationRecord
   def stringify
     moves_with_eights = %w(forward backward_or_lateral horn_slide)
     string = ""
-    if moves_with_eights.include? fundamental.type
-      string << "#{num_eights} "
-      string << "#{"eight".pluralize num_eights} of " unless ["Step side", "Side step"].include? fundamental.name
+
+    if fundamental.hats_off?
+      is_last_move = self.find_by(drill_id: drill_id, position: position + 1).nil?
+      string = "Halt kick down, hats off #{is_last_move ? "Ohio on the end" : "1-2-3"}"
+    else
+      if moves_with_eights.include? fundamental.type
+        string << "#{num_eights} "
+        string << "#{"eight".pluralize num_eights} of " unless ["step side", "side step"].include? fundamental.name
+      end
+      string << fundamental.name
+      string << " in #{num_eights} #{"count".pluralize num_eights}" if fundamental.slow_turn?
     end
-    string << fundamental.name
-    string << " in #{num_eights} #{"count".pluralize num_eights}" if fundamental.slow_turn?
   end
 end
