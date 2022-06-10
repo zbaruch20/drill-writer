@@ -2,6 +2,8 @@ require "uri"
 
 class User < ApplicationRecord
   include UserHelper
+  # Callbacks
+  before_save { email.downcase! }
 
   # Associations
   has_many :drills, dependent: :destroy

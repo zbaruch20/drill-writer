@@ -20,17 +20,17 @@ class Drill < ApplicationRecord
   def stringify
     # before_string
     if self.ramp?
-      before_string = "Your drill is RAMP!!!! (WOOOOO!!!!) #{ramp_cadences == 0 ? "Cadences ad infinitum" : "#{ramp_cadences} cadences"}, "
-      before_string << "play the first note, sing through the slow step, into:"
+      self.before_string = "Your drill is RAMP!!!! (WOOOOO!!!!) #{ramp_cadences == 0 ? "Cadences ad infinitum" : "#{ramp_cadences} cadences"}, "
+      self.before_string << "play the first note, sing through the slow step, into:"
     else
-      before_string = "Your drill is:"
+      self.before_string = "Your drill is:"
     end
 
     # after_string
-    after_string = ""
-    last_fund = moves.max { |a, b| a.position <=> b.position }.fundamental
-    if !last_fund.hats_off? # Hats off at end does its own thing
-      after_string = "Halt kick#{" down" if self.horns_up_down? or self.ramp?}#{" rest 1-2-3" if self.ramp?}"
+    self.after_string = ""
+    last_fund = moves.max { |a, b| a.position <=> b.position }&.fundamental
+    if !last_fund&.hats_off? # Hats off at end does its own thing
+      self.after_string = "Halt kick#{" down" if self.horns_up_down? or self.ramp?}#{" rest 1-2-3" if self.ramp?}"
     end
   end
 end
