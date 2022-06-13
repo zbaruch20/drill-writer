@@ -74,7 +74,68 @@ Below is a brief description of each table and attribute as found in the relatio
 
 All API endpoints are prefixed with `/api/v1/...`. This separates the URLs of the back-end API (developed in Rails) from the URLs of the front-end views (developed in React).
 
-//TODO - Documentation for each endpoint
+## Users
+
+### `GET /api/v1/users`
+
+Returns an array containing all registered users in the application.
+
+Example HTTP request:
+```
+GET /api/v1/users
+
+200 OK
+[
+    {
+        "id":1,
+        "username":"example_user",
+        "email":"example-email@example.com",
+        "drills": [
+            {
+                "id":1,
+                "name":"Example Drill",
+                "description":"My totally awesome example drill!"
+            }
+        ]
+    },
+    {
+        "id":2,
+        "username":"other_user",
+        "email":"other-email@example.com",
+        "drills": []
+    }
+]
+```
+
+### `GET /api/v1/users/:username`
+
+Returns information about the specified user based on their username.
+
+Example HTTP requests:
+```
+GET /api/v1/users/example_user
+
+200 OK
+{
+    "id":1,
+    "username":"example_user",
+    "email":"example-email@example.com",
+    "drills": [
+        {
+            "id":1,
+            "name":"Example Drill",
+            "description":"My totally awesome example drill!"
+        }
+    ]
+}
+```
+
+```
+GET /api/v1/users/invalid_user_not_in_database
+
+400 Not Found
+{}
+```
 
 ---
 
