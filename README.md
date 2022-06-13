@@ -133,7 +133,7 @@ GET /api/v1/users/example_user
 ```
 GET /api/v1/users/invalid_user_not_in_database
 
-400 Not Found
+404 Not Found
 {}
 ```
 
