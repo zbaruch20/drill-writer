@@ -9,4 +9,6 @@ Rails.application.routes.draw do
       resources :moves, only: %i(create update destroy)
     end
   end
+
+  get "*path", to: "pages#index", via: :all # Redirect all other paths to index
 end
