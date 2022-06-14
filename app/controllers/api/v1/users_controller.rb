@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+  protect_from_forgery with: :null_session
 
   # GET /api/v1/users
   def index
@@ -11,6 +12,37 @@ class Api::V1::UsersController < ApplicationController
 
     if @user.nil?
       render status: :not_found
+    end
+  end
+
+  # POST /api/v1/users
+  def create
+    @user = User.new(user_params)
+
+    if !@user.save
+      render json: { errors: @user.errors.messages }, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH /api/v1/users/:username
+  def update
+    @user = User.find_by username: params[:username]
+
+    if !@user.update user_params
+      render json: { errors: @user.errors.messages }, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /api/v1/users/:username
+  def destroy
+    @user = User.find_by username: params[:username]
+
+    if @user.nil?
+      render json: {}, status: :not_found
+    elsif @user.destroy
+      head :no_content
+    else
+      render json: { errors: @user.errors.messages }, status: :unprocessable_entity
     end
   end
 
