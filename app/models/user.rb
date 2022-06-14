@@ -28,5 +28,9 @@ class User < ApplicationRecord
 
   has_secure_password
   validates :password, confirmation: true,
-                       format: PASSWORD_REGEX
+                       format: PASSWORD_REGEX, on: :create
+  validates :password, confirmation: true,
+                       format: PASSWORD_REGEX,
+                       allow_nil: true,
+                       allow_blank: true, on: :update
 end
