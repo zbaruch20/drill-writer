@@ -87,21 +87,21 @@ GET /api/v1/users
 200 OK
 [
     {
-        "id":1,
-        "username":"example_user",
-        "email":"example-email@example.com",
+        "id": 1,
+        "username": "example_user",
+        "email": "example-email@example.com",
         "drills": [
             {
-                "id":1,
-                "name":"Example Drill",
-                "description":"My totally awesome example drill!"
+                "id": 1,
+                "name": "Example Drill",
+                "description": "My totally awesome example drill!"
             }
         ]
     },
     {
         "id":2,
-        "username":"other_user",
-        "email":"other-email@example.com",
+        "username": "other_user",
+        "email": "other-email@example.com",
         "drills": []
     }
 ]
@@ -111,30 +111,114 @@ GET /api/v1/users
 
 Returns information about the specified user based on their username.
 
-Example HTTP requests:
+Example HTTP request:
 ```
 GET /api/v1/users/example_user
 
 200 OK
 {
-    "id":1,
-    "username":"example_user",
-    "email":"example-email@example.com",
+    "id": 1,
+    "username": "example_user",
+    "email": "example-email@example.com",
     "drills": [
         {
-            "id":1,
-            "name":"Example Drill",
-            "description":"My totally awesome example drill!"
+            "id": 1,
+            "name": "Example Drill",
+            "description": "My totally awesome example drill!"
+        }
+    ]
+}
+```
+
+### `POST /api/v1/users`
+
+Creates a new user and adds it to the database. *Note: passwords must contain at least 8 characters, an uppercase letter, a lowercase letter, a number, and a symbol.*
+
+Example HTTP request:
+```
+POST /api/v1/users
+{
+    "user": {
+        "username": "test_user",
+        "email": "test-email@example.com",
+        "password": "Password1!",
+        "password_confirmation": "Password1!"
+    }
+}
+
+200 OK
+{
+    "id": 2,
+    "username": "test_user",
+    "email": "test-email@example.com",
+    "drills": []
+}
+```
+
+### `PATCH /api/v1/users/:username`
+
+Updates basic information about the specified user based on their username. You can update any or all of the username, email, or password. You must be authenticated as the specified user in order to use this endpoint. *Note: Updating a user's drills are accomplished with the necessary Drills endpoints.*
+
+Example HTTP requests:
+```
+PATCH /api/v1/users/example_user
+{
+    "user": {
+        "username": "example_user_updated"
+    }
+}
+
+200 OK
+{
+    "id": 1,
+    "username": "example_user_updated",
+    "email": "example-email@example.com",
+    "drills": [
+        {
+            "id": 1,
+            "name": "Example Drill",
+            "description": "My totally awesome example drill!"
         }
     ]
 }
 ```
 
 ```
-GET /api/v1/users/invalid_user_not_in_database
+PATCH /api/v1/users/example_user_updated
+{
+    "user": {
+        "username": "example_user",
+        "email": "example-email-updated@example.com",
+        "password": "Updated0Password%",
+        "password_confirmation": "Updated0Password%"
+    }
+}
 
-404 Not Found
-{}
+200 OK
+{
+    "id": 1,
+    "username": "example_user",
+    "email": "example-email-updated@example.com",
+    "drills": [
+        {
+            "id": 1,
+            "name": "Example Drill",
+            "description": "My totally awesome example drill!"
+        }
+    ]
+}
+```
+
+### `DELETE /api/v1/users/:username`
+
+Removes the user with the specified username from the database. You must be authenticated as the specified user in order to use this endpoint.
+
+Example HTTP request:
+
+```
+DELETE /api/v1/users/example_user
+
+204 No Content
 ```
 
 ---

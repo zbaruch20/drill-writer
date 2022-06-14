@@ -11,7 +11,7 @@ class Api::V1::UsersController < ApplicationController
     @user = User.find_by username: params[:username]
 
     if @user.nil?
-      render status: :not_found
+      head :not_found
     end
   end
 
@@ -28,7 +28,9 @@ class Api::V1::UsersController < ApplicationController
   def update
     @user = User.find_by username: params[:username]
 
-    if !@user.update user_params
+    if @user.nil?
+      head :not_found
+    elsif !@user.update user_params
       render json: { errors: @user.errors.messages }, status: :unprocessable_entity
     end
   end
@@ -38,7 +40,7 @@ class Api::V1::UsersController < ApplicationController
     @user = User.find_by username: params[:username]
 
     if @user.nil?
-      render json: {}, status: :not_found
+      head :not_found
     elsif @user.destroy
       head :no_content
     else

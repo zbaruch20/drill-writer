@@ -31,6 +31,6 @@ class User < ApplicationRecord
                        format: PASSWORD_REGEX, on: :create
   validates :password, confirmation: true,
                        format: PASSWORD_REGEX,
-                       allow_nil: true,
-                       allow_blank: true, on: :update
+                       allow_nil: true, on: :update
+  validates :password_confirmation, presence: true, on: :create
 end
