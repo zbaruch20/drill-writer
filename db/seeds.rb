@@ -24,6 +24,7 @@ types_and_moves = {
     "Left Oblique 6-to-5",
     "Right Oblique 8-to-5",
     "Right Oblique 6-to-5",
+    "Step Kicks",
   ],
   backward_or_lateral: [
     "Backward",
@@ -75,11 +76,17 @@ puts fundamentals_params if DEBUG
 fundamentals = Fundamental.create! fundamentals_params
 
 # Example user
-example_user = User.create! username: "example_user", email: "example-email@example.com", password: ENV["DRILL_WRITER_EXAMPLE_USER_PASSWORD"]
+example_user = User.create! username: "example_user",
+                            email: "example-email@example.com",
+                            password: ENV["DRILL_WRITER_EXAMPLE_USER_PASSWORD"],
+                            password_confirmation: ENV["DRILL_WRITER_EXAMPLE_USER_PASSWORD"]
 puts example_user.attributes if DEBUG
 
 # Example drill
-example_drill = Drill.create! name: "Example Drill", description: "My totally awesome example drill!", user: example_user, style: :horns_up_down
+example_drill = Drill.create! name: "Example Drill",
+                              description: "My totally awesome example drill!",
+                              user: example_user,
+                              style: :horns_up_down
 puts example_drill.attributes if DEBUG
 
 move_names_and_eights = [
